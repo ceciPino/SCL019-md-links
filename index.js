@@ -6,7 +6,7 @@ const colors = require('colors');
 const prompt = require('prompt-sync')();
 
 let inputPath = prompt('Ingresa la ruta del archivo: '.magenta);
-console.log(`Ruta ingresada: '${inputPath}'`.white);
+console.log(`Ruta ingresada: '${inputPath}'`.green);
 
 let pathConverted = appJs.pathAbsoluteOrRelative(inputPath);
 
@@ -17,3 +17,4 @@ pathConverted = appJs.normalizedPath(pathConverted);
 appJs.fileExists(pathConverted);
 appJs.pathExtName(pathConverted);
 appJs.fileAccess(pathConverted);
+appJs.mdData(pathConverted);

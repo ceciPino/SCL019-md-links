@@ -40,6 +40,105 @@ const fileAccess = (route) => {
     }
 }
 
+// ******* VALIDAR LINKS *******
+
+const returnLinks = (archive) => {
+    const splitLines = archive.split("\n"); //eslint-disable-line
+      let linksList = [];
+      for (let i=0; i<splitLines.length; i++) {
+        const line = splitLines[i];
+        //const regularEx = /(http(s)?:\/\/[^\s)]+)/g; //links sin markdown
+        const regularEx = /\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/g; //links con markdown
+        const links = line.matchAll(regularEx);
+        const match = regularEx.test(line);
+        if (match) {
+          for (const link of links) {
+            const data = {
+              text: link[1],
+              href: link[2],
+              //file: inputPath,
+              line: i + 1,
+            };
+            //validateLink(link[2])
+            linksList.push(data);
+          }
+        }
+      }
+      console.log(`Se han encontrado ${linksList.length} links`.magenta)
+      console.log(linksList)
+      return linksList;
+  }
+
+const mdData = (route) => fs.readFile(route, "utf-8", (error, archive) => {
+    if (error) {
+        console.log("archivo no existe"); //eslint-disable-line no-alert
+        return false;
+    }
+    else {
+        returnLinks(archive)
+    }
+});
+
+// const validateLink = (link) => {
+//     const options = {
+//       hostname: url.parse(link).host,
+//       port: 443,
+//       path: url.parse(link).pathname,
+//       method: "HEAD",
+//     }
+//     const req = https.request(options, link => {
+//       console.log(`Status Code: ${link.statusCode} para ${options.hostname+options.path}`)
+    
+//       link.on('data', d => {
+//         process.stdout.write(d)
+//       })
+//       return link.statusCode
+//     })
+//     req.on('error', error => {
+//       //console.error(error)
+//       console.log(`Status Code: NOTFOUND ${link} no existe`)
+//     })
+//     req.end()
+//     return link.statusCode
+//   }
+
+//Esta promesa lee los links y verifica su status
+const linkValidation = (link) => {
+    return new Promise((resolve) => {
+      //options detalla las características de la petición http
+      const options = {
+        method: 'HEAD',
+        hostname: url.parse(link).host, //ruta donde se envía la petición
+        port: 443, //canal del servidor, que escucha la petición, suele ocuparse el 80
+        path: url.parse(link).pathname, //todo lo que está después del slash
+      }
+
+      const req = https.request(options, response => {
+        //console.log(response)
+        const validSatus = {
+          linkname: link,
+          Code: response.statusCode,
+          status: response.statusCode <= 399,
+        };
+        resolve(validSatus);
+  
+      });
+      
+      
+      req.on('error', error => {
+        //console.error(error)
+        const invalidStatus = {
+          linkname: link,
+          status: error.statusCode >= 400,
+        };
+        resolve(invalidStatus); //en promesas, resolve = return
+      })
+  
+      req.end()
+  })
+};
+  
+
 
 
 module.exports = {
@@ -49,5 +148,8 @@ module.exports = {
     normalizedPath: normalizedPath,
     fileExists,
     pathExtName,
-    fileAccess
+    fileAccess,
+    mdData,
+    returnLinks,
+    linkValidation
 };

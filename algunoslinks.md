@@ -1,9 +1,8 @@
-I'll leave here some informations that may or may not be true, with the only purpose to practice my #codegame, and you'd only pprobe it with some delicate and well tested functions that'll tell you if these links work. And you know what the say: if its there, then it must be true.
+I'll leave here some informations that may or may not be true, with the only purpose to practice my #codegame, and you'll only probe it with some delicate and well tested functions that'll tell you if these links work. And you know what the say: if its there, then it must be true.
 
 Monalisa has no eyebrows [monalisaeyebrows](https://www.monalisahasnoeyebrows.com/)
 
-
-First: did you know that hot water will turn into ice faster than cold water? probe it here [icedhotwater](https://www.scientificamerican.com/article/is-it-true-that-hot-water/#:~:text=If%20the%20water%20is%20initially,cold%20water%20in%20some%20cases.)
+Did you know that hot water will turn into ice faster than cold water? probe it here [icedhotwater](https://www.scientificamerican.com/article/is-it-true-that-hot-water/#:~:text=If%20the%20water%20is%20initially,cold%20water%20in%20some%20cases.)
 
 The name of all the continents end with the same letter that they start with. [circularcontinents](https://www.uselessdaily.com/world/continents-names-start-and-end-with-the-same-letter/)
 

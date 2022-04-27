@@ -2,14 +2,14 @@
 const index = require('../index.js');
 const appJs = require('../app.js');
 
-const arraySomeLinks = [
-  {
-    text: 'monalisaeyebrows',
-    href: 'https://www.monalisahasnoeyebrows.com/',
-    file: 'algunoslinks.md',
-    line: 1
-  }
-]
+// const arraySomeLinks = [
+//   {
+//     text: 'monalisaeyebrows',
+//     href: 'https://www.monalisahasnoeyebrows.com/',
+//     file: 'algunoslinks.md',
+//     line: 1
+//   }
+// ]
 
 let absoluteRoute = '/Users/ceci/Documents/LABORATORIA/MD links/SCL019-md-links/algunoslinks.md',
     relativeRoute = 'algunoslinks.md',
@@ -38,11 +38,11 @@ describe('conviertiendo ruta relativa a ruta absoluta', () => {
 describe('si ruta es relativa, retorna función absolutedPath, si no, retorna ruta intacta', () => {
   test('si ruta es relativa, retorna función absolutedPath', () => {
     let routeIsRelative = appJs.isPathAbsolute(relativeRoute);
-    expect(routeIsRelative).toBe(absoluteRoute);
+    expect(routeIsRelative).toBe(false);
   });
   test('si la ruta es absoluta debería retornar la ruta ingresada sin cambios', () => {
     let routeAbsolute = appJs.isPathAbsolute(absoluteRoute)
-    expect(routeAbsolute).toBe(absoluteRoute);
+    expect(routeAbsolute).toBe(true);
   });
 });
 
